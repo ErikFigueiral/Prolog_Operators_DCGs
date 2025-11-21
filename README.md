@@ -57,15 +57,13 @@ R = [[1,a,foo],[1,a,bar],[1,b,foo],[1,b,bar],
      
 Tree:
 ```text
-        igual
-          |
-          R
-          |
-          x
-   -----------------
-   [1,2]           x
-              -------------
-              [a,b]     [foo,bar]
+                 igual
+                /     \
+               x       R
+        ------------
+        [1,2]    x
+             ---------
+           [a,b]   [foo,bar]
 ```
 Other interesting form to do this and avoiding to add complexity making new operators and avoiding errors is use a predicate to help us:
 ```prolog
