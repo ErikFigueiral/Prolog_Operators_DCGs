@@ -9,7 +9,7 @@ The focus is on exploiting **associativity** to design new operators. In Prolog,
 
 ---
 
-## 🔹 Example: Cartesian Product in Prolog
+## Example: Cartesian Product in Prolog
 
 ```prolog
 % Cartesian product: combine each element of L1 with each element of L2
@@ -26,7 +26,7 @@ concatenar([Car|Cdr], L, [Car|R]) :-
 
 % Generate flat combinations
 linea(_, [], []).
-linea(Elemento, [Car|Cdr], [[Elemento,Car]|Resto]) :-
+linea(Elemento, [Car|Cdr], [[Elemento|Car]|Resto]) :- % [Elemento|Car] =>[a,b,c] to solve [[a,b],c]
     linea(Elemento, Cdr, Resto).
 
 ```
@@ -83,7 +83,15 @@ eval(L1 x Expr, R) :-
 We can also express the same grammar using **Definite Clause Grammars (DCGs)**.  
 A DCG is essentially a **grammar with explicit semantics**: it not only defines which sequences of tokens are valid (syntax), but also attaches computations (semantic actions) to those rules.  
 This makes DCGs much more powerful than a pure grammar, because they can parse and evaluate at the same time.
-
+```text
+Sintax:
+S → L x S
+S → L x L
+L → [lista]
+Semantic:
+⟦ L x L ⟧ = cartesiano(L1, L2)
+⟦ L x S ⟧ = cartesiano(L1, ⟦S⟧)
+```
 ```prolog
 % Recognize a list token
 lista(L) --> [L], {is_list(L)}.
